@@ -28,6 +28,41 @@ class Enemy {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
+class Player {
+    constructor(initLoc=[202, 374]) {
+      this.sprite = 'images/char-boy.png';// The image/sprite for the player
+      this.x = initLoc[0];//initial horizontal position
+      this.y = initLoc[1];//intial vertical position
+    }
+
+    // Update the player's position, required method for game
+    // Parameter: dt, a time delta between ticks
+    update() {} // empty because movement is managed by handleInput
+
+    // Draw the player on the screen, required method for game
+    render() {
+      ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    }
+
+    handleInput(key) {
+      switch (key) {
+        case 'left':
+          this.x -= 101;
+          break;
+        case 'right':
+          this.x += 101;
+          break;
+        case 'up':
+          this.y -= 83;
+          break;
+        case 'down':
+          this.y += 83;
+          break;
+        default:
+          break;
+      }
+    }
+}
 
 
 // Now instantiate your objects.
