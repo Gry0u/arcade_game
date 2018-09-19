@@ -78,8 +78,13 @@ class Player {
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
-let en = new Enemy();
-let allEnemies = [new Enemy(), new Enemy([101,126], 100)];
+let allEnemies = [];
+//Instatiate 3 enemies with a random speed and add it to the array
+for (i = 1; i < 4; i++ ) {
+  let enemy = new Enemy([101, i * 83 - 31], 50 + Math.random() * 200);
+  allEnemies.push(enemy);
+}
+
 // Place the player object in a variable called player
 let player = new Player();
 
