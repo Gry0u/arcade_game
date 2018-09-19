@@ -47,16 +47,27 @@ class Player {
     handleInput(key) {
       switch (key) {
         case 'left':
-          this.x -= 101;
+          //move to left and no offscreen
+          this.x = this.x === 0 ? 404 : this.x - 101;
           break;
+          //move to right and no offscreen
         case 'right':
-          this.x += 101;
+          this.x = this.x === 404 ? 0 : this.x + 101;
           break;
+          //move up and winning condition
         case 'up':
-          this.y -= 83;
+          if (this.y === 42) {
+            this.y -= 83;
+            alert('Congratulations, you won!');
+            this.x = 202;
+            this.y = 374;
+          } else {
+            this.y -= 83;
+          }
           break;
+          //move down and no offscreen
         case 'down':
-          this.y += 83;
+          this.y = this.y === 374 ? this.y : this.y + 83;
           break;
         default:
           break;
@@ -68,7 +79,7 @@ class Player {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 let en = new Enemy();
-let allEnemies = [new Enemy(), new Enemy([101,83], 100)];
+let allEnemies = [new Enemy(), new Enemy([101,126], 100)];
 // Place the player object in a variable called player
 let player = new Player();
 
