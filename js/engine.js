@@ -89,7 +89,8 @@ var Engine = (function(global) {
      * the data/properties related to the object. Do your drawing in your
      * render methods.
      */
-     //Checks if 2 intervals [a,b] & [c,d] intersect
+
+     //Function helper to check if 2 intervals [a,b] & [c,d] intersect
      //https://fgiesen.wordpress.com/2011/10/16/checking-for-interval-overlap/
      function intersect(a, b, c, d) {
        const low = Math.max(a, c);//lower bound of intersection
@@ -98,14 +99,19 @@ var Engine = (function(global) {
        return low < high;
      }
 
-     //Rectangular collision detection function: check if any of the enemy bouding boxes overlaps with the player bounding box
+     //Rectangular collision detection function:
+     //Checks if any of the enemy bounding boxes overlaps with the player
+     //bounding box
      function checkCollisions() {
        for (let enemy of allEnemies) {
-         //collision happens if the projection intervals on the horizontal axis intersect
+         //collision happens if
+         //the projection intervals on the horizontal axis intersect...
          if (intersect(player.x, player.x + 50, enemy.x, enemy.x + 50) &&
          //and if the projection intervals on the vetical axis intersect as well
          intersect(player.y, player.y + 50, enemy.y, enemy.y + 50)) {
+           //moves back player to initial position
            reset();
+           //Displays game over message
            alert('Oooh, you got caught! Try again!');
            break;
          }
@@ -183,7 +189,6 @@ var Engine = (function(global) {
      * those sorts of things. It's only called once by the init() method.
      */
     function reset() {
-        // noop
         player.x = 202;
         player.y = 374;
     }
