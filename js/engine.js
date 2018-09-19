@@ -105,7 +105,8 @@ var Engine = (function(global) {
          if (intersect(player.x, player.x + 50, enemy.x, enemy.x + 50) &&
          //and if the projection intervals on the vetical axis intersect as well
          intersect(player.y, player.y + 50, enemy.y, enemy.y + 50)) {
-           console.log('game over');
+           reset();
+           alert('Oooh, you got caught! Try again!');
            break;
          }
        }
@@ -183,6 +184,8 @@ var Engine = (function(global) {
      */
     function reset() {
         // noop
+        player.x = 202;
+        player.y = 374;
     }
 
     /* Go ahead and load all of the images we know we're going to need to
