@@ -9,7 +9,7 @@
  * drawn but that is not the case. What's really happening is the entire "scene"
  * is being drawn over and over, presenting the illusion of animation.
  *
- * This engine makes the canvas' context (ctx) object globally available to make 
+ * This engine makes the canvas' context (ctx) object globally available to make
  * writing app.js a little simpler to work with.
  */
 
@@ -79,7 +79,7 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
-        // checkCollisions();
+        checkCollisions();
     }
 
     /* This is called by the update function and loops through all of the
@@ -89,6 +89,27 @@ var Engine = (function(global) {
      * the data/properties related to the object. Do your drawing in your
      * render methods.
      */
+     //Checks if 2 intervals [a,b] & [c,d] intersect
+     //https://fgiesen.wordpress.com/2011/10/16/checking-for-interval-overlap/
+     function intersect(a, b, c, d) {
+       const low = Math.max(a, c);//lower bound of intersection
+       const high = Math.min(b, d);//higher bound of intersection
+       //intervals intersect if the intersection is not empty
+       return low < high;
+     }
+
+     //Rectangular collision detection function: check if any of the enemy bouding boxes overlaps with the player bounding box
+     function checkCollisions() {
+       for (let enemy of allEnemies) {
+         //collision happens if the projection intervals on the horizontal axis intersect
+         if (intersect(player.x, player.x + 50, enemy.x, enemy.x + 50) &&
+         //and if the projection intervals on the vetical axis intersect as well
+         intersect(player.y, player.y + 50, enemy.y, enemy.y + 50)) {
+           console.log('game over');
+           break;
+         }
+       }
+     }
     function updateEntities(dt) {
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);
@@ -117,7 +138,7 @@ var Engine = (function(global) {
             numRows = 6,
             numCols = 5,
             row, col;
-        
+
         // Before drawing, clear existing canvas
         ctx.clearRect(0,0,canvas.width,canvas.height)
 
