@@ -64,6 +64,9 @@ class Player extends Character {
             alert('Congratulations, you won!');
             this.x = 202;
             this.y = 374;
+            allEnemies.forEach(function(enemy) {
+              enemy.speed = 50 + Math.random() * 250;
+            });
           } else {
             this.y -= 83;
           }
@@ -84,7 +87,7 @@ class Player extends Character {
 let allEnemies = [];
 //Instatiate 3 enemies with a random speed and add them to the array
 for (let i = 1; i < 4; i++ ) {
-  let enemy = new Enemy(101, i * 83 - 31, 50 + Math.random() * 200);
+  let enemy = new Enemy(101, i * 83 - 31, 50 + Math.random() * 250);
   allEnemies.push(enemy);
 }
 
