@@ -1,13 +1,23 @@
 // Enemies the player must avoid
 'use strict';
-class Enemy {
-    constructor(initLoc, speed) {
-      this.sprite = 'images/enemy-bug.png';// The image/sprite for our enemies
-      this.x = initLoc[0];//initial horizontal position
-      this.y = initLoc[1];//intial vertical position
-      this.speed = speed;//speed
-    }
+class Character {
+  constructor(x, y, sprite, size=50) {
+    this.x = x;//initial horizontal position
+    this.y = y;//intial vertical position
+    this.sprite = `images/${sprite}.png`;
+  }
 
+  // Draw the character on the screen
+  render() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+  }
+}
+
+class Enemy extends Character {
+    constructor (x, y, speed) {
+      super(x, y, 'enemy-bug',);
+      this.speed = speed;
+    }
     // Update the enemy's position
     // Parameter: dt, a time delta between ticks
     update(dt) {
@@ -20,18 +30,11 @@ class Enemy {
       (this.x + this.speed * dt) % 505 :
       this.x + this.speed * dt ;
     }
-
-    // Draw the enemy on the screen
-    render() {
-      ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-    }
 }
 
-class Player {
-    constructor(initLoc=[202, 374]) {
-      this.sprite = 'images/char-boy.png';// The image/sprite for the player
-      this.x = initLoc[0];//initial horizontal position
-      this.y = initLoc[1];//initial vertical position
+class Player extends Character {
+    constructor() {
+      super(202, 374, 'char-boy',);
     }
 
     // Update the player's position
@@ -81,7 +84,7 @@ class Player {
 let allEnemies = [];
 //Instatiate 3 enemies with a random speed and add them to the array
 for (let i = 1; i < 4; i++ ) {
-  let enemy = new Enemy([101, i * 83 - 31], 50 + Math.random() * 200);
+  let enemy = new Enemy(101, i * 83 - 31, 50 + Math.random() * 200);
   allEnemies.push(enemy);
 }
 
