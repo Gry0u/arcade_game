@@ -1,4 +1,5 @@
 // Enemies the player must avoid
+'use strict';
 class Enemy {
     constructor(initLoc, speed) {
       this.sprite = 'images/enemy-bug.png';// The image/sprite for our enemies
@@ -79,7 +80,7 @@ class Player {
 // Place all enemy objects in an array called allEnemies
 let allEnemies = [];
 //Instatiate 3 enemies with a random speed and add them to the array
-for (i = 1; i < 4; i++ ) {
+for (let i = 1; i < 4; i++ ) {
   let enemy = new Enemy([101, i * 83 - 31], 50 + Math.random() * 200);
   allEnemies.push(enemy);
 }
