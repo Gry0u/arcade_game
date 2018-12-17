@@ -4,7 +4,7 @@ Game inspired from the Konami classic arcade game Frogger.
 ### Play the online version
 [Here](https://arcade-game-gry0u.herokuapp.com/)
 
-## Or play locally
+### Or play locally
 - Clone the repository
 - Open the index.html file in your web browser.
 
